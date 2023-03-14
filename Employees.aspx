@@ -7,7 +7,9 @@
         <h1>Employees Details</h1>
         <asp:GridView ID="GridView1" runat="server" CssClass="table table-striped" AutoGenerateColumns="False" DataKeyNames="EMP_ID" DataSourceID="SqlDataSource1">
             <Columns>
-                <asp:CommandField ShowDeleteButton="True" />
+                <asp:CommandField ControlStyle-CssClass="btn btn-secondary" ShowDeleteButton="True" ShowEditButton="True" >
+<ControlStyle CssClass="btn btn-secondary"></ControlStyle>
+                </asp:CommandField>
                 <asp:BoundField DataField="EMP_ID" HeaderText="EMP_ID" ReadOnly="True" SortExpression="EMP_ID" />
                 <asp:BoundField DataField="EMP_NAME" HeaderText="EMP_NAME" SortExpression="EMP_NAME" />
                 <asp:BoundField DataField="BIRTH_DATE" HeaderText="BIRTH_DATE" SortExpression="BIRTH_DATE" DataFormatString="{0:dd-MMM-yyyy}" />

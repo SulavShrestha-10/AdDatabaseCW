@@ -5,23 +5,15 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="row m-1">
         <h1>Voting Record of Employees</h1>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" ProviderName="<%$ ConnectionStrings:ConnectionString.ProviderName %>" SelectCommand="SELECT v.emp_name as &quot;Voter Name&quot;, vd.dept_name as &quot;Voter Department&quot;, c.emp_id &quot;Candidate ID&quot;, c.emp_name &quot;Candidate Name&quot;, cd.dept_name &quot;Candidate Department&quot;, vr.voting_month, vr.voting_year
-from voting_record vr
-join employee c on vr.candidate_id=c.emp_id
-join employee v on vr.voter_id=v.emp_id
-join department cd on cd.dept_id=c.dept_id
-join department vd on vd.dept_id=v.dept_id
-where v.emp_id = :employee">
-            <SelectParameters>
-                <asp:ControlParameter ControlID="DropDownList1" Name="employee" PropertyName="SelectedValue" />
-            </SelectParameters>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" ProviderName="<%$ ConnectionStrings:ConnectionString.ProviderName %>" SelectCommand="SELECT v.EMP_NAME AS &quot;Voter Name&quot;, vd.DEPT_NAME AS &quot;Voter Department&quot;, c.EMP_ID AS &quot;Candidate ID&quot;, c.EMP_NAME AS &quot;Candidate Name&quot;, cd.DEPT_NAME AS &quot;Candidate Department&quot;, vr.VOTING_MONTH, vr.VOTING_YEAR FROM VOTING_RECORD vr, EMPLOYEE c, EMPLOYEE v, DEPARTMENT cd, DEPARTMENT vd WHERE vr.CANDIDATE_ID = c.EMP_ID AND vr.VOTER_ID = v.EMP_ID AND cd.DEPT_ID = c.DEPT_ID AND vd.DEPT_ID = v.DEPT_ID">
         </asp:SqlDataSource>
-        <div class="col-md-2 d-flex my-3 align-content-center justify-content-center">
-            <label class="form-label fw-bold">Select a Employee: </label>
-            <asp:DropDownList class="form-control" ID="DropDownList1" runat="server" AutoPostBack="True" DataSourceID="SqlDataSource2" DataTextField="EMP_NAME" DataValueField="EMP_ID">
+        <div class="col-md-3 d-flex my-3 align-content-center justify-content-center">
+            <label class="form-label me-2 fw-bold">Select a Employee: </label>
+            <asp:DropDownList class="form-control me-2" ID="DropDownList1" runat="server" AutoPostBack="True" DataSourceID="SqlDataSource2" DataTextField="EMP_NAME" DataValueField="EMP_ID">
             </asp:DropDownList>
+            <asp:Button ID="Button1" runat="server" Text="Show Results" CssClass="btn btn-primary" OnClick="Button1_Click" />
         </div>
-        <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" DataKeyNames="Candidate ID">
+        <asp:GridView ID="GridView1" CssClass="table table-striped table-responsive" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" DataKeyNames="Candidate ID" AllowPaging="True">
             <Columns>
                 <asp:BoundField DataField="Voter Name" HeaderText="Voter Name" SortExpression="Voter Name" />
                 <asp:BoundField DataField="Voter Department" HeaderText="Voter Department" SortExpression="Voter Department" />

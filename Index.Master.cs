@@ -53,5 +53,10 @@ namespace OnlineVotingSystem
         {
             Response.Redirect("VotingRecord.aspx");
         }
+
+        protected void LinkButton9_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Best_Employee.aspx");
+        }
     }
 }

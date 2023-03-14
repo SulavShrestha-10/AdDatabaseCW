@@ -5,9 +5,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container row m-1">
         <h1>Address Details</h1>
-        <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="ADDRESS_ID" DataSourceID="SqlDataSource1">
+        <asp:GridView ID="GridView1" CssClass="table table-striped" runat="server" AutoGenerateColumns="False" DataKeyNames="ADDRESS_ID" DataSourceID="SqlDataSource1">
             <Columns>
-                <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
+                <asp:CommandField ControlStyle-CssClass="btn btn-secondary" ShowDeleteButton="True" ShowEditButton="True" />
                 <asp:BoundField DataField="ADDRESS_ID" HeaderText="ADDRESS_ID" ReadOnly="True" SortExpression="ADDRESS_ID" />
                 <asp:BoundField DataField="CITY" HeaderText="CITY" SortExpression="CITY" />
                 <asp:BoundField DataField="DISTRICT" HeaderText="DISTRICT" SortExpression="DISTRICT" />
@@ -31,5 +31,34 @@
                 <asp:Parameter Name="ADDRESS_ID" Type="Decimal" />
             </UpdateParameters>
         </asp:SqlDataSource>
+        <div>
+            <asp:FormView ID="FormView1" runat="server" DataKeyNames="ADDRESS_ID" DataSourceID="SqlDataSource1">
+                <InsertItemTemplate>
+                    <h3 class="mb-3">Address Form</h3>
+                    <div class="mb-2">
+                        <label class="form-label">
+                            CITY:</label>
+                        <asp:TextBox CssClass="form-control" ID="CITYTextBox" runat="server" Text='<%# Bind("CITY") %>' />
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">
+                            DISTRICT:</label>
+                        <asp:TextBox CssClass="form-control" ID="DISTRICTTextBox" runat="server" Text='<%# Bind("DISTRICT") %>' />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">
+                            PROVINCE:</label>
+                        <asp:TextBox CssClass="form-control" ID="PROVINCETextBox" runat="server" Text='<%# Bind("PROVINCE") %>' />
+                    </div>
+                    <div>
+                        <asp:LinkButton CssClass="btn btn-success" ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Insert" />
+                        <asp:LinkButton CssClass="btn btn-danger" ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
+                    </div>
+                </InsertItemTemplate>
+                <ItemTemplate>
+                    <asp:LinkButton CssClass="btn btn-primary btn-lg" ID="NewButton" runat="server" CausesValidation="False" CommandName="New" Text="New" />
+                </ItemTemplate>
+            </asp:FormView>
+        </div>
     </div>
 </asp:Content>
